@@ -67,8 +67,6 @@ from decimal import Decimal
 
 true < true (результат сравнения 5 и 10) конечно же true не меньше чем true
 
----
-
 
 
  
