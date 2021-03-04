@@ -1,12 +1,12 @@
 from typing import List
 
 
-# table1 = [
-#     ['Выполнено', '+7 328 204‐38‐39', '17%', '17%', None],
-#     ['Не выполнено', '+7 304 166‐11‐08', '34%', '34%', None],
-#     ['Выполнено', '+7 567 381‐63‐27', '49%', '49%', None],
-#     ['Выполнено', '+7 114 834‐24‐90', '95%', '95%', None],
-# ]
+table1 = [
+    ['', 'Выполнено', '+7 328 204‐38‐39', '17%', '17%', None],
+    ['', 'Не выполнено', '+7 304 166‐11‐08', '34%', '34%', None],
+    ['', 'Выполнено', '+7 567 381‐63‐27', '49%', '49%', None],
+    ['', 'Выполнено', '+7 114 834‐24‐90', '95%', '95%', None],
+]
 
 
 # * - разделяет параметры в неизменяемом списке
@@ -34,11 +34,12 @@ def delete_none(table):
     count_none = 0
     for i in table:
         for j in i:
-            if j is None:
+            if j is None or j == '':
                 count_none += 1
         if len(i) == count_none:
             table.remove(i)
         count_none = 0
+    return table
 
 
 def transform(table):
@@ -78,11 +79,11 @@ def transform(table):
 
 def f23(table):
     table = transpose(table)
+    table = delete_none(table)
     table = transform(table)
     table = delete_doubles(table)
-    delete_none(table)
     return table
 
 
 # Если сделать print, то выведет none , так как функция ничего не возвращает
-# print(f23(table1))
+print(f23(table1))
