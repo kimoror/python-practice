@@ -1,12 +1,20 @@
+import copy
 from typing import List
 
 
-# table1 = [
-#     ['Выполнено', '+7 328 204‐38‐39', '17%', '17%', None],
-#     ['Не выполнено', '+7 304 166‐11‐08', '34%', '34%', None],
-#     ['Выполнено', '+7 567 381‐63‐27', '49%', '49%', None],
-#     ['Выполнено', '+7 114 834‐24‐90', '95%', '95%', None],
-# ]
+table1 = [
+    ['Выполнено', '+7 328 204-38-39', '17%', '17%'],
+    ['Не выполнено', '+7 304 166-11-08', '34%', '34%'],
+    ['Выполнено', '+7 567 381-63-27', '49%', '49%'],
+    ['Выполнено', '+7 114 834-24-90', '95%', '95%'],
+]
+
+table2 = [
+    ['Не выполнено', '+7 739 139‐97‐56', '40%', '40%'],
+    ['Не выполнено', '+7 459 456‐73‐63', '6%', '6%'],
+    ['Не выполнено', '+7 083 953‐25‐50', '11%', '11%'],
+    ['Выполнено', '+7 542 257‐17‐32', '80%', '80%']
+]
 
 
 # * - разделяет параметры в неизменяемом списке
@@ -42,38 +50,61 @@ def delete_none(table):
 
 
 def transform(table):
-    first_column = []
-    for iter in table[0]:
-        if iter == 'Выполнено':
-            first_column.append('Да')
-        else:
-            first_column.append('Нет')
-    table[0] = first_column
+    # first_column = []
+    # for iter in table[0]:
+    #     if iter == 'Выполнено':
+    #         first_column.append('Да')
+    #     else:
+    #         first_column.append('Нет')
+    # table[0] = first_column
+    #
+    # second_column = []
+    # for i in table[1]:
+    #     # i = i[i.find(" ") + 1:]
+    #     # lis = i.split('')
+    #     # print(lis[0])
+    #     # i = lis[2]
+    #     # i = str(i[7:])
+    #     # i = i[i.find(" ") + 1:]
+    #     # left_i = str(i[:6])
+    #     # right_i = str(i[7:])
+    #     # i = str('')
+    #     # i = left_i + right_i
+    #     # i = i.replace(chr(8208), chr(45))
+    #     # origin_i = copy.copy(i)
+    #     # i = origin_i.split(' ')[2].split('-')[0]
+    #     # i += '-'+origin_i.split(' ')[2].split('-')[1]
+    #     # i += origin_i.split(' ')[2].split('-')[2]
+    #     # i = i.split(' ')[2].split('-')[0] + '-'+i.split(' ')[2].split('-')[1] + i.split(' ')[2].split('-')[2]
+    #     second_column.append(i)
+    # table[1] = second_column
+    #
+    # third_column = []
+    # for i in table[3]:
+    #     i = i[:-1]
+    #     third_column.append(str(round(int(i)/100, 1)))
+    # table[3] = third_column
+    #
+    # fourth_column = []
+    # for i in table[2]:
+    #     i = i[:-1]
+    #     fourth_column.append(str(round(int(i) / 100, 1)))
+    # table[2] = fourth_column
+    #
+    # return table
+    a = [[], [], []]
 
-    second_column = []
-    for i in table[1]:
-        i = i[i.find(" ") + 1:]
-        i = i[i.find(" ") + 1:]
-        left_i = i[:6]
-        right_i = i[7:]
-        i = ''
-        i += left_i + right_i
-        second_column.append(i)
-    table[1] = second_column
+    for array in table:
+        if array[1] == 'Выполнено':
+            a[0].append('Да')
+        elif array[1] == 'Не выполнено':
+            a[0].append('Нет')
 
-    third_column = []
-    for i in table[3]:
-        i = i[:-1]
-        third_column.append(str(round(float(i)/100, 1)))
-    table[3] = third_column
+        a[1].append(array[2].split(' ')[2].split('-')[0] + '-' + array[2].split(' ')[2].split('-')[1] + array[2].split(' ')[2].split('-')[2])
 
-    fourth_column = []
-    for i in table[2]:
-        i = i[:-1]
-        fourth_column.append(str(round(float(i) / 100, 1)))
-    table[2] = third_column
-
-    return table
+        tmp0 = array[3].split('%')[0]
+        tmp0 = int(tmp0) / 100
+        a[2].append(str(round(tmp0, 1)))
 
 
 def f23(table):
@@ -85,4 +116,7 @@ def f23(table):
 
 
 # Если сделать print, то выведет none , так как функция ничего не возвращает
-# print(f23(table1))
+print(f23(table1))
+print(f23(table2))
+
+# print(ord('‐'))
