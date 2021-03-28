@@ -44,3 +44,13 @@ for key, value in _dict.items():
 for freq, word in _list[0:10]:
     print(f'{word:>10} count: {freq:>3}')
 file_read.close()
+
+#Создать график и сохранить его как картинку
+import matplotlib.pyplot as plt
+import random
+
+
+xs = range(0, 10)
+# Символ ; здесь используется, чтобы не выводить служебную информацию на экран
+plt.plot(xs, [random.random() for _ in xs]);
+plt.savefig('graph.svg')
